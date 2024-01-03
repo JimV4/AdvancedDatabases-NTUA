@@ -1,0 +1,41 @@
++---------+---------+--------+--------+-----+---------+-----------+--------+------+--------------------+--------------+--------+--------+------------+---------+--------------------+--------------+--------------------+------+------------+--------+--------+--------+--------+--------------------+--------------------+-------+---------+--------------------+
+|    DR_NO|Date Rptd|DATE OCC|TIME OCC|AREA |AREA NAME|Rpt Dist No|Part 1-2|Crm Cd|         Crm Cd Desc|       Mocodes|Vict Age|Vict Sex|Vict Descent|Premis Cd|         Premis Desc|Weapon Used Cd|         Weapon Desc|Status| Status Desc|Crm Cd 1|Crm Cd 2|Crm Cd 3|Crm Cd 4|            LOCATION|        Cross Street|    LAT|      LON|      Victim Descent|
++---------+---------+--------+--------+-----+---------+-----------+--------+------+--------------------+--------------+--------+--------+------------+---------+--------------------+--------------+--------------------+------+------------+--------+--------+--------+--------+--------------------+--------------------+-------+---------+--------------------+
+|  1307355|     NULL|    NULL|    1350|   13|   Newton|       1385|       2|   900|VIOLATION OF COUR...|0913 1814 2000|      48|       M|           H|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    AA|Adult Arrest|     900|    NULL|    NULL|    NULL|300 E  GAGE      ...|                NULL|33.9825|-118.2695|Hispanic/Latin/Me...|
+| 11401303|     NULL|    NULL|      45|   14|  Pacific|       1485|       2|   740|VANDALISM - FELON...|          0329|       0|       M|           W|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     740|    NULL|    NULL|    NULL|SEPULVEDA        ...|MANCHESTER       ...|33.9599|-118.3962|               White|
+| 70309629|     NULL|    NULL|    1515|   13|   Newton|       1324|       2|   946|OTHER MISCELLANEO...|          0344|       0|       M|           H|      103|               ALLEY|          NULL|                NULL|    IC| Invest Cont|     946|    NULL|    NULL|    NULL|1300 E  21ST     ...|                NULL|34.0224|-118.2524|Hispanic/Latin/Me...|
+| 90631215|     NULL|    NULL|     150|    6|Hollywood|        646|       2|   900|VIOLATION OF COUR...|1100 0400 1402|      47|       F|           W|      101|              STREET|           102|            HAND GUN|    IC| Invest Cont|     900|     998|    NULL|    NULL|CAHUENGA         ...|HOLLYWOOD        ...|34.1016|-118.3295|               White|
+|100100501|     NULL|    NULL|    2100|    1|  Central|        176|       1|   122|     RAPE, ATTEMPTED|          0400|      47|       F|           H|      103|               ALLEY|           400|STRONG-ARM (HANDS...|    IC| Invest Cont|     122|    NULL|    NULL|    NULL|8TH              ...|SAN PEDRO        ...|34.0387|-118.2488|Hispanic/Latin/Me...|
+|100100506|     NULL|    NULL|    1650|    1|  Central|        162|       1|   442|SHOPLIFTING - PET...|     0344 1402|      23|       M|           B|      404|    DEPARTMENT STORE|          NULL|                NULL|    AA|Adult Arrest|     442|    NULL|    NULL|    NULL|700 W  7TH       ...|                NULL| 34.048|-118.2577|               Black|
+|100100508|     NULL|    NULL|    2005|    1|  Central|        182|       1|   330|BURGLARY FROM VEH...|          0344|      46|       M|           H|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     330|    NULL|    NULL|    NULL|PICO             ...|GRAND            ...|34.0389|-118.2643|Hispanic/Latin/Me...|
+|100100509|     NULL|    NULL|    2100|    1|  Central|        157|       1|   230|ASSAULT WITH DEAD...|          0416|      51|       M|           B|      710|       OTHER PREMISE|           500|UNKNOWN WEAPON/OT...|    AA|Adult Arrest|     230|    NULL|    NULL|    NULL|500    CROCKER   ...|                NULL|34.0435|-118.2427|               Black|
+|100100510|     NULL|    NULL|     230|    1|  Central|        171|       1|   230|ASSAULT WITH DEAD...|     0400 0416|      30|       M|           H|      108|         PARKING LOT|           400|STRONG-ARM (HANDS...|    IC| Invest Cont|     230|    NULL|    NULL|    NULL|800 W  OLYMPIC   ...|                NULL| 34.045| -118.264|Hispanic/Latin/Me...|
+|100100511|     NULL|    NULL|    2100|    1|  Central|        132|       1|   341|THEFT-GRAND ($950...|     0344 1402|      55|       M|           W|      710|       OTHER PREMISE|          NULL|                NULL|    IC| Invest Cont|     341|     998|    NULL|    NULL|200 S  OLIVE     ...|                NULL|34.0538|-118.2488|               White|
++---------+---------+--------+--------+-----+---------+-----------+--------+------+--------------------+--------------+--------+--------+------------+---------+--------------------+--------------+--------------------+------+------------+--------+--------+--------+--------+--------------------+--------------------+-------+---------+--------------------+
+only showing top 10 rows
+
++--------------------+-----+
+|      Victim Descent|count|
++--------------------+-----+
+|Hispanic/Latin/Me...|12255|
+|               White| 6269|
+|               Black| 4712|
+|               Other| 2591|
+|             Unknown| 1094|
+|         Other Asian|  597|
+|              Korean|  104|
+|             Chinese|   61|
+|            Filipino|   27|
+|American Indian/A...|   19|
+|          Vietnamese|   11|
+|            Japanese|   10|
+|    Pacific Islander|    4|
+|        Asian Indian|    4|
+|           Cambodian|    3|
+|            Hawaiian|    1|
+|           Guamanian|    1|
++--------------------+-----+
+
+real    1m38.802s
+user    0m41.523s
+sys     0m4.178s

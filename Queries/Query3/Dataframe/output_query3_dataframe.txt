@@ -1,0 +1,25 @@
++--------------------+-----+
+|        Vict Descent|count|
++--------------------+-----+
+|Hispanic/Latin/Me...|12255|
+|               White| 6269|
+|               Black| 4712|
+|               Other| 2591|
+|             Unknown| 1094|
+|         Other Asian|  597|
+|              Korean|  104|
+|             Chinese|   61|
+|            Filipino|   27|
+|American Indian/A...|   19|
+|          Vietnamese|   11|
+|            Japanese|   10|
+|        Asian Indian|    4|
+|    Pacific Islander|    4|
+|           Cambodian|    3|
+|            Hawaiian|    1|
+|           Guamanian|    1|
++--------------------+-----+
+
+real    1m36.324s
+user    0m41.609s
+sys     0m3.548s
