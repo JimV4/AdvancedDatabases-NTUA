@@ -5,6 +5,7 @@ from pyspark.sql.functions import col, when
 spark = SparkSession \
     .builder \
     .appName("SQL query 3 execution") \
+    .config("spark.executor.instances", "4") \
     .getOrCreate() \
 
 crimes_df1 = spark.read.csv("Crime_Data_from_2010_to_2019.csv", header=True, inferSchema=True)

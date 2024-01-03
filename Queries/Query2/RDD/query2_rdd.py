@@ -4,6 +4,7 @@ import csv
 sc = SparkSession \
     .builder \
     .appName("RDD query 2 execution") \
+    .config("spark.executor.instances", "4") \
     .getOrCreate() \
     .sparkContext
 

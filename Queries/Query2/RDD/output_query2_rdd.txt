@@ -1,4 +1,1 @@
 [('morning', 123748), ('noon', 148077), ('evening', 186896), ('night', 237137)]
-real    0m45.055s
-user    0m23.276s
-sys     0m2.861s
