@@ -3,7 +3,7 @@ from pyspark.sql.window import Window
 from pyspark.sql import functions as F
 from pyspark.sql.types import StructField, StructType, IntegerType, DoubleType, StringType, DateType
 
-spark = SparkSession.builder.appName("Dataframe query 1 execution").getOrCreate()
+spark = SparkSession.builder.appName("Dataframe query 1 execution").config("spark.executor.instances", "4").getOrCreate()
 
 
 crimes_df1 = spark.read.csv("Crime_Data_from_2010_to_2019.csv", header=True, inferSchema=True)
