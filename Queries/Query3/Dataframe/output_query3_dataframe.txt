@@ -1,25 +1,54 @@
++---------+----------+----------+--------+-----+-----------+-----------+--------+------+--------------------+--------------------+--------+--------+------------+---------+--------------------+--------------+--------------------+------+------------+--------+--------+--------+--------+--------------------+------------+-------+---------+
+|    DR_NO| Date Rptd|  DATE OCC|TIME OCC|AREA |  AREA NAME|Rpt Dist No|Part 1-2|Crm Cd|         Crm Cd Desc|             Mocodes|Vict Age|Vict Sex|Vict Descent|Premis Cd|         Premis Desc|Weapon Used Cd|         Weapon Desc|Status| Status Desc|Crm Cd 1|Crm Cd 2|Crm Cd 3|Crm Cd 4|            LOCATION|Cross Street|    LAT|      LON|
++---------+----------+----------+--------+-----+-----------+-----------+--------+------+--------------------+--------------------+--------+--------+------------+---------+--------------------+--------------+--------------------+------+------------+--------+--------+--------+--------+--------------------+------------+-------+---------+
+|150115681|2015-06-29|2015-06-29|     800|    1|    Central|        185|       1|   330|BURGLARY FROM VEH...| 1307 0344 0329 1609|      38|       F|           F|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     330|    NULL|    NULL|    NULL|                 9TH|       MAPLE|34.0395|-118.2527|
+|150126680|2015-12-01|2015-11-29|    1940|    1|    Central|        154|       1|   330|BURGLARY FROM VEH...|      1307 1609 0344|      27|       F|           H|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     330|    NULL|    NULL|    NULL|                 5TH| LOS ANGELES|34.0461|-118.2476|
+|150418249|2015-12-20|2015-12-19|    2045|    4| Hollenbeck|        416|       1|   648|               ARSON|                NULL|      69|       F|           H|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    IC| Invest Cont|     648|    NULL|    NULL|    NULL|    500 E  AVENUE 28|        NULL| 34.081|-118.2076|
+|150618483|2015-08-16|2015-08-16|      45|    6|  Hollywood|        639|       1|   330|BURGLARY FROM VEH...|           0344 1607|      35|       M|           O|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     330|    NULL|    NULL|    NULL|           HOLLYWOOD|      HOBART|34.1018|-118.3056|
+|152005022|2015-01-21|2015-01-21|    1415|   20|    Olympic|       2055|       1|   230|ASSAULT WITH DEAD...|0907 0906 0319 13...|      28|       F|           H|      101|              STREET|           102|            HAND GUN|    IC| Invest Cont|     230|     998|    NULL|    NULL|1000 S  MARIPOSA ...|        NULL|34.0526|-118.2989|
+|151423417|2015-09-01|2015-09-01|    1550|   14|    Pacific|       1494|       2|   946|OTHER MISCELLANEO...|           2004 1402|       0|       X|           X|      212|TRANSPORTATION FA...|          NULL|                NULL|    AA|Adult Arrest|     946|    NULL|    NULL|    NULL|    300    WORLD WAY|        NULL| 33.944|-118.4073|
+|151509046|2015-03-31|2015-03-23|     600|   15|N Hollywood|       1522|       2|   354|   THEFT OF IDENTITY|                0100|      40|       M|           H|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    IC| Invest Cont|     354|    NULL|    NULL|    NULL|6500    COLDWATER...|        NULL|34.1936|-118.4166|
+|160605536|2016-01-27|2015-06-01|     800|    6|  Hollywood|        644|       2|   354|   THEFT OF IDENTITY|           1822 0928|      50|       F|           H|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    IC| Invest Cont|     354|    NULL|    NULL|    NULL|1400 N  DETROIT  ...|        NULL|34.0962|-118.3452|
+|160711213|2016-06-15|2015-12-15|     945|    7|   Wilshire|        745|       2|   354|   THEFT OF IDENTITY|                1822|      51|       M|           B|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    IC| Invest Cont|     354|    NULL|    NULL|    NULL|5300 W  OLYMPIC  ...|        NULL|34.0572|-118.3459|
+|152118490|2015-11-10|2015-11-09|    1930|   21|    Topanga|       2107|       1|   330|BURGLARY FROM VEH...|      0906 0344 1307|      32|       M|           O|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     330|    NULL|    NULL|    NULL|21300    PARTHENI...|        NULL|34.2282|-118.5951|
+|150710094|2015-05-22|2015-01-08|    1200|    7|   Wilshire|        767|       1|   343|SHOPLIFTING-GRAND...|           0325 1803|       0|       M|           X|      402|              MARKET|          NULL|                NULL|    AA|Adult Arrest|     343|    NULL|    NULL|    NULL|4100    VENICE   ...|        NULL|34.0457|-118.3255|
+|151717560|2015-10-15|2015-10-15|    1445|   17| Devonshire|       1735|       2|   647|THROWING OBJECT A...| 1240 0447 1300 1310|      48|       F|           W|      101|              STREET|          NULL|                NULL|    IC| Invest Cont|     647|    NULL|    NULL|    NULL|              BALBOA|  CHATSWORTH|34.2648|-118.5023|
+|150519885|2015-12-25|2015-12-25|     240|    5|     Harbor|        585|       1|   210|             ROBBERY| 0325 0334 0316 0302|       0|       M|           O|      401|           MINI-MART|           102|            HAND GUN|    AA|Adult Arrest|     210|    NULL|    NULL|    NULL|1800 S  PACIFIC  ...|        NULL|33.7243|-118.2963|
+|151218263|2015-07-28|2015-07-28|    1020|   12|77th Street|       1251|       1|   210|             ROBBERY|           0344 0400|      52|       F|           B|      502|MULTI-UNIT DWELLI...|           400|STRONG-ARM (HANDS...|    IC| Invest Cont|     210|    NULL|    NULL|    NULL|3300 W  71ST     ...|        NULL|33.9757|-118.3294|
+|150416591|2015-11-04|2015-11-03|    2100|    4| Hollenbeck|        443|       2|   930|CRIMINAL THREATS ...| 0421 1202 0602 0561|      75|       F|           H|      501|SINGLE FAMILY DWE...|           511|       VERBAL THREAT|    AO| Adult Other|     930|    NULL|    NULL|    NULL|2300    CHARLOTTE...|        NULL|34.0567|-118.2024|
+|150214292|2015-07-08|2015-07-08|    2200|    2|    Rampart|        201|       2|   626|INTIMATE PARTNER ...|      0400 1813 2000|      31|       F|           H|      502|MULTI-UNIT DWELLI...|           400|STRONG-ARM (HANDS...|    IC| Invest Cont|     626|    NULL|    NULL|    NULL|1000 N  MARIPOSA ...|        NULL|34.0891|-118.2992|
+|150307582|2015-03-01|2015-02-02|    1800|    3|  Southwest|        356|       2|   946|OTHER MISCELLANEO...|           0100 1501|      18|       F|           B|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    IC| Invest Cont|     946|    NULL|    NULL|    NULL|3700 S  HARVARD  ...|        NULL|  34.02|-118.3062|
+|151808275|2015-03-30|2015-03-30|     430|   18|  Southeast|       1821|       1|   236|INTIMATE PARTNER ...|2000 0906 0913 13...|      26|       F|           B|      101|              STREET|           400|STRONG-ARM (HANDS...|    AO| Adult Other|     236|    NULL|    NULL|    NULL|97TH             ...|      HOOVER|33.9479|-118.2869|
+|151512349|2015-05-29|2015-05-16|     800|   15|N Hollywood|       1548|       1|   341|THEFT-GRAND ($950...|                0344|      67|       M|           W|      502|MULTI-UNIT DWELLI...|          NULL|                NULL|    IC| Invest Cont|     341|    NULL|    NULL|    NULL|5200    BLAKESLEE...|        NULL|34.1649|-118.3724|
+|151609571|2015-06-02|2015-06-02|    1130|   16|   Foothill|       1684|       2|   903|   CONTEMPT OF COURT|      0360 1813 1912|      40|       F|           B|      501|SINGLE FAMILY DWE...|          NULL|                NULL|    IC| Invest Cont|     903|    NULL|    NULL|    NULL|7800    LANKERSHI...|        NULL|34.2166|-118.3919|
++---------+----------+----------+--------+-----+-----------+-----------+--------+------+--------------------+--------------------+--------+--------+------------+---------+--------------------+--------------+--------------------+------+------------+--------+--------+--------+--------+--------------------+------------+-------+---------+
+only showing top 20 rows
+
+Highest 3
 +--------------------+-----+
 |        Vict Descent|count|
 +--------------------+-----+
-|Hispanic/Latin/Me...|12255|
-|               White| 6269|
-|               Black| 4712|
-|               Other| 2591|
-|             Unknown| 1094|
-|         Other Asian|  597|
-|              Korean|  104|
-|             Chinese|   61|
-|            Filipino|   27|
-|American Indian/A...|   19|
-|          Vietnamese|   11|
-|            Japanese|   10|
-|        Asian Indian|    4|
-|    Pacific Islander|    4|
-|           Cambodian|    3|
-|            Hawaiian|    1|
-|           Guamanian|    1|
+|               White|  347|
+|               Other|  110|
+|Hispanic/Latin/Me...|   53|
+|             Unknown|   32|
+|               Black|   18|
+|         Other Asian|   16|
 +--------------------+-----+
 
-real    1m36.324s
-user    0m41.609s
-sys     0m3.548s
+
+Lowest 3
++--------------------+-----+
+|        Vict Descent|count|
++--------------------+-----+
+|Hispanic/Latin/Me...| 1003|
+|               Black|  333|
+|               White|  272|
+|               Other|  166|
+|             Unknown|   44|
+|         Other Asian|   30|
+|              Korean|    4|
+|American Indian/A...|    1|
+|             Chinese|    1|
++--------------------+-----+
+
