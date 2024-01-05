@@ -51,18 +51,22 @@ lowest_3_zip_codes = income_df.orderBy(col("Estimated Median Income").asc()).lim
 both_zip_codes = highest_3_zip_codes.union(lowest_3_zip_codes)
 
 joined1 = victims_alias_crimes_df.alias("victims_alias_crimes").join(
-    rev_geocoding_df.alias("geocoding"),
+    rev_geocoding_df.alias("geocoding").hint("merge"),
     (col("victims_alias_crimes.LAT") == col("geocoding.LAT")) & (col("victims_alias_crimes.LON") == col("geocoding.LON")),
     "inner"
 )
+joined1.explain()
 
 print("Highest 3")
-joined2 = joined1.join(highest_3_zip_codes, highest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
-joined2.groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc()).show() 
+joined2 = joined1.join(highest_3_zip_codes.hint("merge"), highest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
+joined2 = joined2.groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc())
+joined2.explain()
+joined2.show()
 
 print()
 
 print("Lowest 3")
-joined3 = joined1.join(lowest_3_zip_codes, lowest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
-joined3.groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc()).show() 
-
+joined3 = joined1.join(lowest_3_zip_codes.hint("merge"), lowest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
+joined3 = joined3.groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc())
+joined3.explain()
+joined3.show() 
