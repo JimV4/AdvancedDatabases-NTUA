@@ -1,5 +1,0 @@
-Number of crimes commited in morning hours: 72619
-Number of crimes commited in noon hours: 85887
-Number of crimes commited in evening hours: 114904
-Number of crimes commited in night hours: 146361
-419771

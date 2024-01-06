@@ -4,8 +4,8 @@ from pyspark.sql.functions import col, when, regexp_extract, regexp_replace, yea
 
 spark = SparkSession \
     .builder \
-    .appName("Dataframe query 3 execution 4 executors") \
-    .config("spark.executor.instances", "4") \
+    .appName("Dataframe query 3 execution 2 executors final") \
+    .config("spark.executor.instances", "2") \
     .getOrCreate() \
 
 crimes_df = spark.read.csv("Crime_Data_from_2010_to_2019.csv", header=True, inferSchema=True)
@@ -56,8 +56,6 @@ income_with_crimes_df = income_df.join(rev_geocoding_zips_df, income_df["Zip Cod
 # Fint highest 3 and lowest 3 zip codes based on income 
 highest_3_zip_codes = income_with_crimes_df.orderBy(col("Estimated Median Income").desc()).limit(3)
 lowest_3_zip_codes = income_with_crimes_df.orderBy(col("Estimated Median Income").asc()).limit(3)
-highest_3_zip_codes.show()
-lowest_3_zip_codes.show()
 
 # Get zip code on crimes by joining crimes with geocoding on LAT, LON
 joined1 = victims_alias_crimes_df.alias("victims_alias_crimes").join(
