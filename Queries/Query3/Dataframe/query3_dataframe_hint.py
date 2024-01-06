@@ -4,7 +4,7 @@ from pyspark.sql.functions import col, when, regexp_extract, regexp_replace, yea
 
 spark = SparkSession \
     .builder \
-    .appName("Dataframe query 3 execution 4 executors") \
+    .appName("Dataframe query 3 execution") \
     .config("spark.executor.instances", "4") \
     .getOrCreate() \
 
@@ -16,10 +16,8 @@ crimes_df = crimes_df.withColumn("Vict Age", col("Vict Age").cast(IntegerType())
 crimes_df = crimes_df.withColumn("LAT", col("LAT").cast(DoubleType())) 
 crimes_df = crimes_df.withColumn("LON", col("LON").cast(DoubleType())) 
 
-# Filter year 2015 on crimes and filter nulls
-excluded_null_crimes = crimes_df.filter((year(crimes_df["Date Rptd"]) == 2015) & crimes_df["Vict Descent"].isNotNull())
+excluded_null_crimes = crimes_df.filter((year(crimes_df["DATE OCC"]) == 2015) & crimes_df["Vict Descent"].isNotNull())
 
-# Alias names for user-friendly results
 victims_alias_crimes_df = excluded_null_crimes.withColumn("Vict Descent", when(crimes_df["`Vict Descent`"] == "A", "Other Asian")
     .when(crimes_df["`Vict Descent`"] == "B", "Black") 
     .when(crimes_df["`Vict Descent`"] == "C", "Chinese")
@@ -40,42 +38,52 @@ victims_alias_crimes_df = excluded_null_crimes.withColumn("Vict Descent", when(c
     .when(crimes_df["`Vict Descent`"] == "X", "Unknown")
     .when(crimes_df["`Vict Descent`"] == "Z", "Asian Indian"))
 
-# Read income and filter out $ and , in the income column
 income_df = spark.read.csv("LA_income_2015.csv", header=True, inferSchema=True)
 income_df = income_df.withColumn("Estimated Median Income", regexp_replace("Estimated Median Income", '\\$', ''))
 income_df = income_df.withColumn("Estimated Median Income", regexp_replace("Estimated Median Income", ',', '').cast("int"))
 
-# Read geocoding and if a columnn has two zip codes, always keep the first
+highest_3_zip_codes = income_df.orderBy(col("Estimated Median Income").desc()).limit(3)
+lowest_3_zip_codes = income_df.orderBy(col("Estimated Median Income").asc()).limit(3)
+
 rev_geocoding_df = spark.read.csv("revgecoding.csv", header=True, inferSchema=True)
 rev_geocoding_df = rev_geocoding_df.withColumn("ZIPcode", regexp_extract("ZIPcode", r"(\d+)", 1).cast("int"))
 
-# Filter out zip codes where none crime occured 
-rev_geocoding_zips_df = rev_geocoding_df.select("ZIPcode").distinct()
-income_with_crimes_df = income_df.join(rev_geocoding_zips_df, income_df["Zip Code"] == rev_geocoding_zips_df["ZIPcode"], "inner")
-
-# Fint highest 3 and lowest 3 zip codes based on income 
-highest_3_zip_codes = income_with_crimes_df.orderBy(col("Estimated Median Income").desc()).limit(3)
-lowest_3_zip_codes = income_with_crimes_df.orderBy(col("Estimated Median Income").asc()).limit(3)
-highest_3_zip_codes.show()
-lowest_3_zip_codes.show()
-
-# Get zip code on crimes by joining crimes with geocoding on LAT, LON
 joined1 = victims_alias_crimes_df.alias("victims_alias_crimes").join(
-    rev_geocoding_df.alias("geocoding"),
+    rev_geocoding_df.alias("geocoding").hint("merge"),
     (col("victims_alias_crimes.LAT") == col("geocoding.LAT")) & (col("victims_alias_crimes.LON") == col("geocoding.LON")),
     "inner"
 )
+joined1.explain()
 
-# Join the above with highest 3 and lowest 3 zip codes to get the result
 print("Highest 3")
-joined2 = joined1.join(highest_3_zip_codes, highest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
+joined2 = joined1.join(highest_3_zip_codes.hint("merge"), highest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
 joined2 = joined2.groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc())
+joined2.explain()
 joined2.show()
 
 print()
 
 print("Lowest 3")
-joined3 = joined1.join(lowest_3_zip_codes, lowest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
+joined3 = joined1.join(lowest_3_zip_codes.hint("merge"), lowest_3_zip_codes["Zip Code"] == joined1["ZIPcode"], "inner")
 joined3 = joined3.groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc())
+joined3.explain()
 joined3.show() 
 
+""" joined1_highest = highest_3_zip_codes.join(rev_geocoding_df,
+    rev_geocoding_df["ZIPcode"] == highest_3_zip_codes["Zip Code"], "inner"
+).select("LAT", "LON")
+
+joined1_lowest = lowest_3_zip_codes.join(rev_geocoding_df,
+    rev_geocoding_df["ZIPcode"] == lowest_3_zip_codes["Zip Code"], "inner"
+).select("LAT", "LON")
+
+print("Highest 3")
+result1 = joined1_highest.alias("highest").join(
+    victims_alias_crimes_df.alias("victims_alias_crimes"), 
+    (col("highest.LAT") == col("victims_alias_crimes.LAT")) & (col("highest.LON") == col("victims_alias_crimes.LON")), 
+"inner").groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc()).show()
+
+result2 = joined1_lowest.alias("lowest").join(
+    victims_alias_crimes_df.alias("victims_alias_crimes"), 
+    (col("lowest.LAT") == col("victims_alias_crimes.LAT")) & (col("lowest.LON") == col("victims_alias_crimes.LON")), 
+"inner").groupBy("Vict Descent").count().select("Vict Descent", "count").orderBy(col("count").desc()).show() """

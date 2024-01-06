@@ -1,41 +1,16 @@
 == Physical Plan ==
 AdaptiveSparkPlan isFinalPlan=false
-+- BroadcastHashJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#43)), knownfloatingpointnormalized(normalizenanandzero(LON#44))], [knownfloatingpointnormalized(normalizenanandzero(LAT#288)), knownfloatingpointnormalized(normalizenanandzero(LON#289))], Inner, BuildRight, false
++- BroadcastHashJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#43)), knownfloatingpointnormalized(normalizenanandzero(LON#44))], [knownfloatingpointnormalized(normalizenanandzero(LAT#297)), knownfloatingpointnormalized(normalizenanandzero(LON#298))], Inner, BuildRight, false
    :- Project [DR_NO#17, cast(gettimestamp(Date Rptd#18, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date) AS Date Rptd#73, cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date) AS DATE OCC#103, TIME OCC#20, AREA #21, AREA NAME#22, Rpt Dist No#23, Part 1-2#24, Crm Cd#25, Crm Cd Desc#26, Mocodes#27, Vict Age#28, Vict Sex#29, CASE WHEN (Vict Descent#30 = A) THEN Other Asian WHEN (Vict Descent#30 = B) THEN Black WHEN (Vict Descent#30 = C) THEN Chinese WHEN (Vict Descent#30 = D) THEN Cambodian WHEN (Vict Descent#30 = F) THEN Filipino WHEN (Vict Descent#30 = G) THEN Guamanian WHEN (Vict Descent#30 = H) THEN Hispanic/Latin/Mexican WHEN (Vict Descent#30 = I) THEN American Indian/Alaskan Native WHEN (Vict Descent#30 = J) THEN Japanese WHEN (Vict Descent#30 = K) THEN Korean WHEN (Vict Descent#30 = L) THEN Laotian WHEN (Vict Descent#30 = O) THEN Other WHEN (Vict Descent#30 = P) THEN Pacific Islander WHEN (Vict Descent#30 = S) THEN Samoan WHEN (Vict Descent#30 = U) THEN Hawaiian WHEN (Vict Descent#30 = V) THEN Vietnamese WHEN (Vict Descent#30 = W) THEN White WHEN (Vict Descent#30 = X) THEN Unknown WHEN (Vict Descent#30 = Z) THEN Asian Indian END AS Vict Descent#219, Premis Cd#31, Premis Desc#32, Weapon Used Cd#33, Weapon Desc#34, Status#35, Status Desc#36, Crm Cd 1#37, Crm Cd 2#38, Crm Cd 3#39, Crm Cd 4#40, ... 4 more fields]
    :  +- Filter ((((year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date)) = 2015) AND isnotnull(Vict Descent#30)) AND isnotnull(LAT#43)) AND isnotnull(LON#44))
    :     +- FileScan csv [DR_NO#17,Date Rptd#18,DATE OCC#19,TIME OCC#20,AREA #21,AREA NAME#22,Rpt Dist No#23,Part 1-2#24,Crm Cd#25,Crm Cd Desc#26,Mocodes#27,Vict Age#28,Vict Sex#29,Vict Descent#30,Premis Cd#31,Premis Desc#32,Weapon Used Cd#33,Weapon Desc#34,Status#35,Status Desc#36,Crm Cd 1#37,Crm Cd 2#38,Crm Cd 3#39,Crm Cd 4#40,... 4 more fields] Batched: false, DataFilters: [(year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/Crime_Data_from_2010_to_2019.csv], PartitionFilters: [], PushedFilters: [IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<DR_NO:int,Date Rptd:string,DATE OCC:string,TIME OCC:int,AREA :int,AREA NAME:string,Rpt Dis...
    +- BroadcastExchange HashedRelationBroadcastMode(List(knownfloatingpointnormalized(normalizenanandzero(input[0, double, true])), knownfloatingpointnormalized(normalizenanandzero(input[1, double, true]))),false), [plan_id=77]
-      +- Project [LAT#288, LON#289, cast(regexp_extract(ZIPcode#290, (\d+), 1) as int) AS ZIPcode#294]
-         +- Filter (isnotnull(LAT#288) AND isnotnull(LON#289))
-            +- FileScan csv [LAT#288,LON#289,ZIPcode#290] Batched: false, DataFilters: [isnotnull(LAT#288), isnotnull(LON#289)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
+      +- Project [LAT#297, LON#298, cast(regexp_extract(ZIPcode#299, (\d+), 1) as int) AS ZIPcode#303]
+         +- Filter (isnotnull(LAT#297) AND isnotnull(LON#298))
+            +- FileScan csv [LAT#297,LON#298,ZIPcode#299] Batched: false, DataFilters: [isnotnull(LAT#297), isnotnull(LON#298)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
 
 
 Highest 3
-== Physical Plan ==
-AdaptiveSparkPlan isFinalPlan=false
-+- Sort [count#483L DESC NULLS LAST], true, 0
-   +- Exchange rangepartitioning(count#483L DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=148]
-      +- HashAggregate(keys=[Vict Descent#219], functions=[count(1)])
-         +- Exchange hashpartitioning(Vict Descent#219, 200), ENSURE_REQUIREMENTS, [plan_id=145]
-            +- HashAggregate(keys=[Vict Descent#219], functions=[partial_count(1)])
-               +- Project [Vict Descent#219]
-                  +- BroadcastHashJoin [ZIPcode#294], [Zip Code#265], Inner, BuildRight, false
-                     :- Project [Vict Descent#219, ZIPcode#294]
-                     :  +- BroadcastHashJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#43)), knownfloatingpointnormalized(normalizenanandzero(LON#44))], [knownfloatingpointnormalized(normalizenanandzero(LAT#288)), knownfloatingpointnormalized(normalizenanandzero(LON#289))], Inner, BuildRight, false
-                     :     :- Project [CASE WHEN (Vict Descent#30 = A) THEN Other Asian WHEN (Vict Descent#30 = B) THEN Black WHEN (Vict Descent#30 = C) THEN Chinese WHEN (Vict Descent#30 = D) THEN Cambodian WHEN (Vict Descent#30 = F) THEN Filipino WHEN (Vict Descent#30 = G) THEN Guamanian WHEN (Vict Descent#30 = H) THEN Hispanic/Latin/Mexican WHEN (Vict Descent#30 = I) THEN American Indian/Alaskan Native WHEN (Vict Descent#30 = J) THEN Japanese WHEN (Vict Descent#30 = K) THEN Korean WHEN (Vict Descent#30 = L) THEN Laotian WHEN (Vict Descent#30 = O) THEN Other WHEN (Vict Descent#30 = P) THEN Pacific Islander WHEN (Vict Descent#30 = S) THEN Samoan WHEN (Vict Descent#30 = U) THEN Hawaiian WHEN (Vict Descent#30 = V) THEN Vietnamese WHEN (Vict Descent#30 = W) THEN White WHEN (Vict Descent#30 = X) THEN Unknown WHEN (Vict Descent#30 = Z) THEN Asian Indian END AS Vict Descent#219, LAT#43, LON#44]
-                     :     :  +- Filter ((((year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date)) = 2015) AND isnotnull(Vict Descent#30)) AND isnotnull(LAT#43)) AND isnotnull(LON#44))
-                     :     :     +- FileScan csv [DATE OCC#19,Vict Descent#30,LAT#43,LON#44] Batched: false, DataFilters: [(year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/Crime_Data_from_2010_to_2019.csv], PartitionFilters: [], PushedFilters: [IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<DATE OCC:string,Vict Descent:string,LAT:double,LON:double>
-                     :     +- BroadcastExchange HashedRelationBroadcastMode(List(knownfloatingpointnormalized(normalizenanandzero(input[0, double, true])), knownfloatingpointnormalized(normalizenanandzero(input[1, double, true]))),false), [plan_id=136]
-                     :        +- Project [LAT#288, LON#289, cast(regexp_extract(ZIPcode#290, (\d+), 1) as int) AS ZIPcode#294]
-                     :           +- Filter ((isnotnull(LAT#288) AND isnotnull(LON#289)) AND isnotnull(cast(regexp_extract(ZIPcode#290, (\d+), 1) as int)))
-                     :              +- FileScan csv [LAT#288,LON#289,ZIPcode#290] Batched: false, DataFilters: [isnotnull(LAT#288), isnotnull(LON#289), isnotnull(cast(regexp_extract(ZIPcode#290, (\d+), 1) as ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
-                     +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=140]
-                        +- Filter isnotnull(Zip Code#265)
-                           +- TakeOrderedAndProject(limit=3, orderBy=[Estimated Median Income#304 DESC NULLS LAST], output=[Zip Code#265])
-                              +- Project [Zip Code#265, cast(regexp_replace(regexp_replace(Estimated Median Income#267, \$, , 1), ,, , 1) as int) AS Estimated Median Income#304]
-                                 +- FileScan csv [Zip Code#265,Estimated Median Income#267] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/LA_income_2015.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<Zip Code:int,Estimated Median Income:string>
-
-
 +--------------------+-----+
 |        Vict Descent|count|
 +--------------------+-----+
@@ -49,31 +24,6 @@ AdaptiveSparkPlan isFinalPlan=false
 
 
 Lowest 3
-== Physical Plan ==
-AdaptiveSparkPlan isFinalPlan=false
-+- Sort [count#611L DESC NULLS LAST], true, 0
-   +- Exchange rangepartitioning(count#611L DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=483]
-      +- HashAggregate(keys=[Vict Descent#219], functions=[count(1)])
-         +- Exchange hashpartitioning(Vict Descent#219, 200), ENSURE_REQUIREMENTS, [plan_id=480]
-            +- HashAggregate(keys=[Vict Descent#219], functions=[partial_count(1)])
-               +- Project [Vict Descent#219]
-                  +- BroadcastHashJoin [ZIPcode#294], [Zip Code#265], Inner, BuildRight, false
-                     :- Project [Vict Descent#219, ZIPcode#294]
-                     :  +- BroadcastHashJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#43)), knownfloatingpointnormalized(normalizenanandzero(LON#44))], [knownfloatingpointnormalized(normalizenanandzero(LAT#288)), knownfloatingpointnormalized(normalizenanandzero(LON#289))], Inner, BuildRight, false
-                     :     :- Project [CASE WHEN (Vict Descent#30 = A) THEN Other Asian WHEN (Vict Descent#30 = B) THEN Black WHEN (Vict Descent#30 = C) THEN Chinese WHEN (Vict Descent#30 = D) THEN Cambodian WHEN (Vict Descent#30 = F) THEN Filipino WHEN (Vict Descent#30 = G) THEN Guamanian WHEN (Vict Descent#30 = H) THEN Hispanic/Latin/Mexican WHEN (Vict Descent#30 = I) THEN American Indian/Alaskan Native WHEN (Vict Descent#30 = J) THEN Japanese WHEN (Vict Descent#30 = K) THEN Korean WHEN (Vict Descent#30 = L) THEN Laotian WHEN (Vict Descent#30 = O) THEN Other WHEN (Vict Descent#30 = P) THEN Pacific Islander WHEN (Vict Descent#30 = S) THEN Samoan WHEN (Vict Descent#30 = U) THEN Hawaiian WHEN (Vict Descent#30 = V) THEN Vietnamese WHEN (Vict Descent#30 = W) THEN White WHEN (Vict Descent#30 = X) THEN Unknown WHEN (Vict Descent#30 = Z) THEN Asian Indian END AS Vict Descent#219, LAT#43, LON#44]
-                     :     :  +- Filter ((((year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date)) = 2015) AND isnotnull(Vict Descent#30)) AND isnotnull(LAT#43)) AND isnotnull(LON#44))
-                     :     :     +- FileScan csv [DATE OCC#19,Vict Descent#30,LAT#43,LON#44] Batched: false, DataFilters: [(year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/Crime_Data_from_2010_to_2019.csv], PartitionFilters: [], PushedFilters: [IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<DATE OCC:string,Vict Descent:string,LAT:double,LON:double>
-                     :     +- BroadcastExchange HashedRelationBroadcastMode(List(knownfloatingpointnormalized(normalizenanandzero(input[0, double, true])), knownfloatingpointnormalized(normalizenanandzero(input[1, double, true]))),false), [plan_id=471]
-                     :        +- Project [LAT#288, LON#289, cast(regexp_extract(ZIPcode#290, (\d+), 1) as int) AS ZIPcode#294]
-                     :           +- Filter ((isnotnull(LAT#288) AND isnotnull(LON#289)) AND isnotnull(cast(regexp_extract(ZIPcode#290, (\d+), 1) as int)))
-                     :              +- FileScan csv [LAT#288,LON#289,ZIPcode#290] Batched: false, DataFilters: [isnotnull(LAT#288), isnotnull(LON#289), isnotnull(cast(regexp_extract(ZIPcode#290, (\d+), 1) as ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
-                     +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [plan_id=475]
-                        +- Filter isnotnull(Zip Code#265)
-                           +- TakeOrderedAndProject(limit=3, orderBy=[Estimated Median Income#304 ASC NULLS FIRST], output=[Zip Code#265])
-                              +- Project [Zip Code#265, cast(regexp_replace(regexp_replace(Estimated Median Income#267, \$, , 1), ,, , 1) as int) AS Estimated Median Income#304]
-                                 +- FileScan csv [Zip Code#265,Estimated Median Income#267] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/LA_income_2015.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<Zip Code:int,Estimated Median Income:string>
-
-
 +--------------------+-----+
 |        Vict Descent|count|
 +--------------------+-----+
@@ -84,7 +34,7 @@ AdaptiveSparkPlan isFinalPlan=false
 |             Unknown|   44|
 |         Other Asian|   30|
 |              Korean|    4|
-|American Indian/A...|    1|
 |             Chinese|    1|
+|American Indian/A...|    1|
 +--------------------+-----+
 
