@@ -4,8 +4,8 @@ from pyspark.sql.functions import col, when, regexp_extract, regexp_replace, yea
 
 spark = SparkSession \
     .builder \
-    .appName("Dataframe query 3 execution 2 executors final") \
-    .config("spark.executor.instances", "2") \
+    .appName("Dataframe query 3 execution 4 executors Final") \
+    .config("spark.executor.instances", "4") \
     .getOrCreate() \
 
 crimes_df = spark.read.csv("Crime_Data_from_2010_to_2019.csv", header=True, inferSchema=True)
@@ -40,10 +40,11 @@ victims_alias_crimes_df = excluded_null_crimes.withColumn("Vict Descent", when(c
     .when(crimes_df["`Vict Descent`"] == "X", "Unknown")
     .when(crimes_df["`Vict Descent`"] == "Z", "Asian Indian"))
 
-# Read income and filter out $ and , in the income column
+# Read income and filter out $ and , in the income column. Keep records that are located on LA
 income_df = spark.read.csv("LA_income_2015.csv", header=True, inferSchema=True)
 income_df = income_df.withColumn("Estimated Median Income", regexp_replace("Estimated Median Income", '\\$', ''))
 income_df = income_df.withColumn("Estimated Median Income", regexp_replace("Estimated Median Income", ',', '').cast("int"))
+income_df = income_df.filter(col("Community").contains("Los Angeles"))
 
 # Read geocoding and if a columnn has two zip codes, always keep the first
 rev_geocoding_df = spark.read.csv("revgecoding.csv", header=True, inferSchema=True)
@@ -53,7 +54,7 @@ rev_geocoding_df = rev_geocoding_df.withColumn("ZIPcode", regexp_extract("ZIPcod
 rev_geocoding_zips_df = rev_geocoding_df.select("ZIPcode").distinct()
 income_with_crimes_df = income_df.join(rev_geocoding_zips_df, income_df["Zip Code"] == rev_geocoding_zips_df["ZIPcode"], "inner")
 
-# Fint highest 3 and lowest 3 zip codes based on income 
+# Find highest 3 and lowest 3 zip codes based on income 
 highest_3_zip_codes = income_with_crimes_df.orderBy(col("Estimated Median Income").desc()).limit(3)
 lowest_3_zip_codes = income_with_crimes_df.orderBy(col("Estimated Median Income").asc()).limit(3)
 

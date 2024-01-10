@@ -1,25 +1,14 @@
-== Physical Plan ==
-AdaptiveSparkPlan isFinalPlan=false
-+- BroadcastHashJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#43)), knownfloatingpointnormalized(normalizenanandzero(LON#44))], [knownfloatingpointnormalized(normalizenanandzero(LAT#297)), knownfloatingpointnormalized(normalizenanandzero(LON#298))], Inner, BuildRight, false
-   :- Project [DR_NO#17, cast(gettimestamp(Date Rptd#18, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date) AS Date Rptd#73, cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date) AS DATE OCC#103, TIME OCC#20, AREA #21, AREA NAME#22, Rpt Dist No#23, Part 1-2#24, Crm Cd#25, Crm Cd Desc#26, Mocodes#27, Vict Age#28, Vict Sex#29, CASE WHEN (Vict Descent#30 = A) THEN Other Asian WHEN (Vict Descent#30 = B) THEN Black WHEN (Vict Descent#30 = C) THEN Chinese WHEN (Vict Descent#30 = D) THEN Cambodian WHEN (Vict Descent#30 = F) THEN Filipino WHEN (Vict Descent#30 = G) THEN Guamanian WHEN (Vict Descent#30 = H) THEN Hispanic/Latin/Mexican WHEN (Vict Descent#30 = I) THEN American Indian/Alaskan Native WHEN (Vict Descent#30 = J) THEN Japanese WHEN (Vict Descent#30 = K) THEN Korean WHEN (Vict Descent#30 = L) THEN Laotian WHEN (Vict Descent#30 = O) THEN Other WHEN (Vict Descent#30 = P) THEN Pacific Islander WHEN (Vict Descent#30 = S) THEN Samoan WHEN (Vict Descent#30 = U) THEN Hawaiian WHEN (Vict Descent#30 = V) THEN Vietnamese WHEN (Vict Descent#30 = W) THEN White WHEN (Vict Descent#30 = X) THEN Unknown WHEN (Vict Descent#30 = Z) THEN Asian Indian END AS Vict Descent#219, Premis Cd#31, Premis Desc#32, Weapon Used Cd#33, Weapon Desc#34, Status#35, Status Desc#36, Crm Cd 1#37, Crm Cd 2#38, Crm Cd 3#39, Crm Cd 4#40, ... 4 more fields]
-   :  +- Filter ((((year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), false) as date)) = 2015) AND isnotnull(Vict Descent#30)) AND isnotnull(LAT#43)) AND isnotnull(LON#44))
-   :     +- FileScan csv [DR_NO#17,Date Rptd#18,DATE OCC#19,TIME OCC#20,AREA #21,AREA NAME#22,Rpt Dist No#23,Part 1-2#24,Crm Cd#25,Crm Cd Desc#26,Mocodes#27,Vict Age#28,Vict Sex#29,Vict Descent#30,Premis Cd#31,Premis Desc#32,Weapon Used Cd#33,Weapon Desc#34,Status#35,Status Desc#36,Crm Cd 1#37,Crm Cd 2#38,Crm Cd 3#39,Crm Cd 4#40,... 4 more fields] Batched: false, DataFilters: [(year(cast(gettimestamp(DATE OCC#19, MM/dd/yyyy hh:mm:ss a, TimestampType, Some(Europe/Athens), ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/Crime_Data_from_2010_to_2019.csv], PartitionFilters: [], PushedFilters: [IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<DR_NO:int,Date Rptd:string,DATE OCC:string,TIME OCC:int,AREA :int,AREA NAME:string,Rpt Dis...
-   +- BroadcastExchange HashedRelationBroadcastMode(List(knownfloatingpointnormalized(normalizenanandzero(input[0, double, true])), knownfloatingpointnormalized(normalizenanandzero(input[1, double, true]))),false), [plan_id=77]
-      +- Project [LAT#297, LON#298, cast(regexp_extract(ZIPcode#299, (\d+), 1) as int) AS ZIPcode#303]
-         +- Filter (isnotnull(LAT#297) AND isnotnull(LON#298))
-            +- FileScan csv [LAT#297,LON#298,ZIPcode#299] Batched: false, DataFilters: [isnotnull(LAT#297), isnotnull(LON#298)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://master-42:54310/user/user/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
-
-
 Highest 3
 +--------------------+-----+
 |        Vict Descent|count|
 +--------------------+-----+
-|               White|  347|
-|               Other|  110|
-|Hispanic/Latin/Me...|   53|
-|             Unknown|   32|
-|               Black|   18|
-|         Other Asian|   16|
+|               White|  714|
+|               Other|  297|
+|Hispanic/Latin/Me...|  119|
+|               Black|   37|
+|             Unknown|   36|
+|         Other Asian|   24|
+|             Chinese|    1|
 +--------------------+-----+
 
 
@@ -27,14 +16,16 @@ Lowest 3
 +--------------------+-----+
 |        Vict Descent|count|
 +--------------------+-----+
-|Hispanic/Latin/Me...| 1003|
-|               Black|  333|
-|               White|  272|
-|               Other|  166|
-|             Unknown|   44|
-|         Other Asian|   30|
-|              Korean|    4|
-|             Chinese|    1|
-|American Indian/A...|    1|
+|Hispanic/Latin/Me...| 1521|
+|               Black| 1079|
+|               White|  692|
+|               Other|  389|
+|         Other Asian|  101|
+|             Unknown|   64|
+|              Korean|    7|
+|American Indian/A...|    3|
+|            Japanese|    3|
+|             Chinese|    2|
+|            Filipino|    2|
 +--------------------+-----+
 
