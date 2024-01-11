@@ -1,8 +1,8 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, to_date
-from pyspark.sql.types import StructField, StructType, IntegerType, DoubleType, StringType, DateType
+from pyspark.sql.types import IntegerType, DoubleType
 
-spark = SparkSession.builder.appName("SQL query 1 execution").config("spark.executor.instances", "4").getOrCreate()
+spark = SparkSession.builder.appName("SQL query 1 execution final").config("spark.executor.instances", "4").getOrCreate()
 
 crimes_df1 = spark.read.csv("Crime_Data_from_2010_to_2019.csv", header=True, inferSchema=True)
 crimes_df2 = spark.read.csv("Crime_Data_from_2020_to_Present.csv", header=True, inferSchema=True)

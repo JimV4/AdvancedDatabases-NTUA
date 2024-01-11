@@ -16,7 +16,7 @@ def get_distance(longit_a, latit_a, longit_b, latit_b):
     distance = central_angle * radius
     return abs(round(distance, 4))
 
-spark = SparkSession.builder.appName("SQL query 4.1 execution").config("spark.executor.instances", "4").getOrCreate()
+spark = SparkSession.builder.appName("SQL query 4 execution final").config("spark.executor.instances", "4").getOrCreate()
 get_distance_udf = udf(lambda lat1, lon1, lat2, lon2: get_distance(lat1, lon1, lat2, lon2))
 spark.udf.register("get_distance", get_distance_udf)
 
