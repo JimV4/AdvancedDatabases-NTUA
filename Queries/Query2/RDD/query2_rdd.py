@@ -33,6 +33,6 @@ crimes_street_day_periods = sc.textFile(",".join(file_paths)) \
     .filter(lambda x: x[15] == "STREET") \
     .map(lambda x: ("morning", 1) if is_morning(x[3]) else (("noon", 1) if is_noon(x[3]) else (("evening", 1) if is_evening(x[3]) else ("night", 1)))) \
     .reduceByKey(lambda x, y: x + y) \
-    .sortBy(lambda x: x[1]) \
+    .sortBy(lambda x: x[1], ascending=False) \
 
 print(crimes_street_day_periods.collect())
