@@ -1,0 +1,31 @@
+Highest 3
++--------------------+-----+
+|        Vict Descent|count|
++--------------------+-----+
+|               White|  714|
+|               Other|  297|
+|Hispanic/Latin/Me...|  119|
+|               Black|   37|
+|             Unknown|   36|
+|         Other Asian|   24|
+|             Chinese|    1|
++--------------------+-----+
+
+
+Lowest 3
++--------------------+-----+
+|        Vict Descent|count|
++--------------------+-----+
+|Hispanic/Latin/Me...| 1521|
+|               Black| 1079|
+|               White|  692|
+|               Other|  389|
+|         Other Asian|  101|
+|             Unknown|   64|
+|              Korean|    7|
+|American Indian/A...|    3|
+|            Japanese|    3|
+|             Chinese|    2|
+|            Filipino|    2|
++--------------------+-----+
+

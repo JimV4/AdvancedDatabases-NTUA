@@ -1,0 +1,33 @@
+root
+ |-- DR_NO: integer (nullable = true)
+ |-- Date Rptd: date (nullable = true)
+ |-- DATE OCC: date (nullable = true)
+ |-- TIME OCC: integer (nullable = true)
+ |-- AREA : integer (nullable = true)
+ |-- AREA NAME: string (nullable = true)
+ |-- Rpt Dist No: integer (nullable = true)
+ |-- Part 1-2: integer (nullable = true)
+ |-- Crm Cd: integer (nullable = true)
+ |-- Crm Cd Desc: string (nullable = true)
+ |-- Mocodes: string (nullable = true)
+ |-- Vict Age: integer (nullable = true)
+ |-- Vict Sex: string (nullable = true)
+ |-- Vict Descent: string (nullable = true)
+ |-- Premis Cd: integer (nullable = true)
+ |-- Premis Desc: string (nullable = true)
+ |-- Weapon Used Cd: integer (nullable = true)
+ |-- Weapon Desc: string (nullable = true)
+ |-- Status: string (nullable = true)
+ |-- Status Desc: string (nullable = true)
+ |-- Crm Cd 1: integer (nullable = true)
+ |-- Crm Cd 2: integer (nullable = true)
+ |-- Crm Cd 3: integer (nullable = true)
+ |-- Crm Cd 4: integer (nullable = true)
+ |-- LOCATION: string (nullable = true)
+ |-- Cross Street: string (nullable = true)
+ |-- LAT: double (nullable = true)
+ |-- LON: double (nullable = true)
+
+Total number of lines: 2988445
+Column data types:
+[('DR_NO', 'int'), ('Date Rptd', 'date'), ('DATE OCC', 'date'), ('TIME OCC', 'int'), ('AREA ', 'int'), ('AREA NAME', 'string'), ('Rpt Dist No', 'int'), ('Part 1-2', 'int'), ('Crm Cd', 'int'), ('Crm Cd Desc', 'string'), ('Mocodes', 'string'), ('Vict Age', 'int'), ('Vict Sex', 'string'), ('Vict Descent', 'string'), ('Premis Cd', 'int'), ('Premis Desc', 'string'), ('Weapon Used Cd', 'int'), ('Weapon Desc', 'string'), ('Status', 'string'), ('Status Desc', 'string'), ('Crm Cd 1', 'int'), ('Crm Cd 2', 'int'), ('Crm Cd 3', 'int'), ('Crm Cd 4', 'int'), ('LOCATION', 'string'), ('Cross Street', 'string'), ('LAT', 'double'), ('LON', 'double')]
