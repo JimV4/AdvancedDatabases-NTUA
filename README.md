@@ -4,10 +4,10 @@
 
 Team 46
 
-| Name - Student ID              | 
-| ------------------------------ |
-| Missiri Vassiliki 03119123	 |
-| Vassiliou Dimitrios 031119830  |
+| Name - Student ID             | 
+| ----------------------------- |
+| Missiri Vassiliki 03119123	|
+| Vassiliou Dimitrios 03119830  |
 
 
 ## 1. Initiate HDFS, YARN, and the history server by running the command:
